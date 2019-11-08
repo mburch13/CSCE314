@@ -54,19 +54,28 @@ public class PrimeOperations {
 		 * 	}--count
 		 * }*/
 		
+		int flag = -1; //change if number is prime
+		
 		for(BigInteger x = new BigInteger("2"); x.compareTo(BigInteger.ZERO) > 0; x = x.add(BigInteger.ONE)) {
 			if(count != 0) {
-				System.out.println("X Before Check: " + x);
+//				System.out.println("X Before Check: " + x);
 				for(BigInteger i = new BigInteger("2"); i.compareTo(x.divide(new BigInteger("2"))) <= 0; i = i.add(BigInteger.ONE)) {
-					if(x.mod(i).equals(BigInteger.ZERO)) {
+					if(x.mod(i).equals(BigInteger.ZERO) 
+							&& x.compareTo(new BigInteger("2")) != 0 
+							|| x.compareTo(new BigInteger("3")) != 0) {
+						flag = -1;
 						break; //number NOT a prime
 					}
-					System.out.println("X After Check: " + x);
+//					System.out.println("X After Check: " + x);
+					flag = 1;
 					
 					//addPrime to the list
 				}
-				--count;
-				System.out.println("Test: " + count);
+				if(flag == 1) {
+					--count;
+					System.out.print(x);
+					System.out.println("\tTest: " + count);
+				}
 			}
 		}
 	}

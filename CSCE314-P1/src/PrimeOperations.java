@@ -4,7 +4,7 @@ import java.math.BigInteger;
 /*
  *  Desc: This class generates primes, twin primes, and hexagon crosses using BigInteger data types.
  */
-public class Primes {
+public class PrimeOperations {
 	
 	// Pair class implementation.
 	private class Pair<T> {

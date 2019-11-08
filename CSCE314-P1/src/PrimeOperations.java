@@ -48,10 +48,18 @@ public class PrimeOperations {
 		/**
 		 * for loop for all possible primes{
 		 * 	if count not 0{
-		 * 		for loop to start checking if number is prime{
-		 * 			if mod2 == 0 
-		 * 		}addPrime()
-		 * 	}--count
+		 * 		check if number is 2 or 3{
+		 * 			flag prime number
+		 * 		}for loop to start checking if number is prime{
+		 * 			if mod2 == 0{
+		 * 				flag not prime
+		 * 			}flag prime number
+		 * 		}if flag is prime number{
+		 * 			addPrime()
+		 * 			--count
+		 * 			}
+		 * 		}
+		 * 	}
 		 * }*/
 		
 		int flag = -1; //change if number is prime

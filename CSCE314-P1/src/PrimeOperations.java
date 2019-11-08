@@ -26,7 +26,7 @@ public class PrimeOperations {
 		 * 	}
 		 * }
 		 */
-		ArrayList primes = new ArrayList();
+		ArrayList<BigInteger> primes = new ArrayList<BigInteger>();
 		if(primes.isEmpty()) {
 			primes.add(x);
 			System.out.println(x + " was added to list");
@@ -42,7 +42,7 @@ public class PrimeOperations {
 	// Output the prime list. Each prime should be on a separate line and the total number of primes should be on the following line.
 	public void printPrimes()
 	{
-//		System.out.println(generatePrimes(count));
+//		System.out.println();
 	}
 		
 	// Output the twin prime list. Each twin prime should be on a separate line with a comma separating them, and the total number of twin primes should be on the following line.
@@ -109,8 +109,17 @@ public class PrimeOperations {
 	// Generate and store a list of twin primes.
 	public void generateTwinPrimes()
 	{
-		//call generatePrimes
-				//while 
+		/* A “twin prime” is a pair of primes that only have one integer between them, 
+		 * such as 5 and 7; 11 and 13; 6269 and 6271; or 12539 and 12541.
+		 * 
+		 * access the primes list
+		 * loop through the list{
+		 * 		if i - i-1 == 2{
+		 * 			pair (i-1, i)
+		 * 		}
+		 * }
+		 * 
+		 */
 	}
 	
 	// Generate and store the hexagon crosses, along with the two twin primes that generate the hexagon cross.

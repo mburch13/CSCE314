@@ -15,16 +15,33 @@ public class PrimeOperations {
 	// Add a prime to the prime list if and only iff it is not already in the list. (ignore duplicates)
 	public void addPrime(BigInteger x)
 	{
-		//if list is null add to list
-				//else check to see if number is in list
-					//if present return
-					//else add to list
+		/* make an array list
+		 * if list is null{
+		 * 	add to list
+		 * 	}else{
+		 * 		check to see if number is in list
+		 * 		if not present{
+		 * 			add to list
+		 * 		}
+		 * 	}
+		 * }
+		 */
+		ArrayList primes = new ArrayList();
+		if(primes.isEmpty()) {
+			primes.add(x);
+			System.out.println(x + " was added to list");
+		}
+		else {
+			if (primes.contains(x) != true) {
+				primes.add(x);
+				System.out.println(x + " was added to list");
+			}
+		}
 	}
 	
 	// Output the prime list. Each prime should be on a separate line and the total number of primes should be on the following line.
 	public void printPrimes()
 	{
-		//call and println generatePrimes
 //		System.out.println(generatePrimes(count));
 	}
 		
@@ -82,8 +99,8 @@ public class PrimeOperations {
 					//addPrime to the list
 					addPrime(x);
 					--count;
-					System.out.print(x);
-					System.out.println("\tTest: " + count);
+//					System.out.print(x);
+//					System.out.println("\tTest: " + count);
 				}
 			}
 		}

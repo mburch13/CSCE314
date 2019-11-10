@@ -8,10 +8,12 @@ public class PrimeOperations {
 	
 	// Pair class implementation.
 	private class Pair<T> {
+//		BigInteger x, y;
 	}
 	
 	// Member variables for containing out lists of integers, twin primes, hexagon crosses, and the pairs of twin primes that make up the hex crosses.
-	
+	ArrayList<BigInteger> primes = new ArrayList<BigInteger>();
+
 	// Add a prime to the prime list if and only iff it is not already in the list. (ignore duplicates)
 	public void addPrime(BigInteger x)
 	{
@@ -26,23 +28,34 @@ public class PrimeOperations {
 		 * 	}
 		 * }
 		 */
-		ArrayList<BigInteger> primes = new ArrayList<BigInteger>();
+
 		if(primes.isEmpty()) {
 			primes.add(x);
-			System.out.println(x + " was added to list");
+//			System.out.println(x + " was added to list");
 		}
 		else {
 			if (primes.contains(x) != true) {
 				primes.add(x);
-				System.out.println(x + " was added to list");
+//				System.out.println(x + " was added to list");
 			}
 		}
+		
+//		for(int i = 0; i < primes.size(); i++) {
+//			System.out.println(primes.get(i));
+//		}
+//		System.out.println("Total Primes: " +primes.size());
 	}
 	
 	// Output the prime list. Each prime should be on a separate line and the total number of primes should be on the following line.
 	public void printPrimes()
 	{
-//		System.out.println();
+//		System.out.print("hello");
+//		System.out.println(primes.size());
+		for(int i = 0; i <= primes.size(); i++) {
+			System.out.println(i);
+		}
+		System.out.println("Total Primes: " +primes.size());
+
 	}
 		
 	// Output the twin prime list. Each twin prime should be on a separate line with a comma separating them, and the total number of twin primes should be on the following line.

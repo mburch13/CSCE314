@@ -7,8 +7,11 @@ public class Project1 {
 		// Instantiate Primes Class
 		PrimeOperations testOne = new PrimeOperations();
 		
+		System.out.print("hello");
+
 		// Generate Primes and test.
 		testOne.generatePrimes(21);
+		System.out.print("hello");
 		testOne.printPrimes();
 		
 		// Generate and test Twin Primes

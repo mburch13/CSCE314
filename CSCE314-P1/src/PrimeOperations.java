@@ -8,13 +8,41 @@ public class PrimeOperations {
 	
 	// Pair class implementation.
 	private class Pair<T> {
-		BigInteger x, y;
+		T x, y;
+		
+		//constructor
+		public Pair(T x1, T y1) {
+			this.x = x1;
+			this.y = y1;
+		}
+
+		public T getX() {
+			return x;
+		}
+
+		public T getY() {
+			return y;
+		}
+
+		public void setX(T x) {
+			this.x = x;
+		}
+
+		public void setY(T y) {
+			this.y = y;
+		}
+		
+		public String toString() {
+			return x + ", " + y;
+		}
+		
 	}
 	
 	// Member variables for containing out lists of integers, twin primes, hexagon crosses, and the pairs of twin primes that make up the hex crosses.
 	ArrayList<BigInteger> primes = new ArrayList<BigInteger>();
-	ArrayList<BigInteger> primeTwins = new ArrayList<BigInteger>();
-
+	ArrayList<PrimeOperations.Pair<BigInteger>> primeTwins = new ArrayList<PrimeOperations.Pair<BigInteger>>();
+	ArrayList<PrimeOperations.Pair<BigInteger>> primePairs = new ArrayList<PrimeOperations.Pair<BigInteger>>();
+	ArrayList<BigInteger> middles = new ArrayList<BigInteger>();
 	// Add a prime to the prime list if and only iff it is not already in the list. (ignore duplicates)
 	public void addPrime(BigInteger x)
 	{
@@ -47,7 +75,7 @@ public class PrimeOperations {
 	{
 //		System.out.print("hello");
 //		System.out.println(primes.size());
-		for(int i = 0; i <= primes.size()-1; i++) {
+		for(int i = 0; i < primes.size(); i++) {
 			System.out.println(primes.get(i));
 		}
 		System.out.println("Total Primes: " +primes.size());
@@ -58,10 +86,13 @@ public class PrimeOperations {
 	public void printTwins()
 	{
 		//call and println generateTwinPrimes
-		for(int i = 1; i < primeTwins.size(); i++) {
-			System.out.println(primeTwins.get(i) + ", " + primeTwins.get(i-1));
+		
+//		for(PrimeOperations.Pair<BigInteger> i: primeTwins) {
+		for(int i = 0; i < primeTwins.size(); i++) {
+			System.out.println(primeTwins.get(i));
+//			System.out.println(i);
 		}
-		System.out.println("Total Twins: " + primeTwins.size()/2);
+		System.out.println("Total Twins: " + primeTwins.size());
 
 	}
 		
@@ -69,10 +100,12 @@ public class PrimeOperations {
 	public void printHexes()
 	{
 		//call and println generateHexPrimes
-		for(int i = 0; i <= primes.size()-1; i++) {
-			System.out.println(i);
-		}
-		System.out.println("Total Hex Crosses: " +primes.size());
+//		for(int i = 0; i < primePairs.size(); i++) {
+//			for(int x = 0; x < middles.size(); x++) {
+//			System.out.println("Prime Paies: " + i + "and " + i+1 + "seperated by" + x + "' " + x+2);
+//			}
+//		}
+		System.out.println("Total Hex Crosses: " + primePairs.size());
 
 	}
 		
@@ -138,13 +171,15 @@ public class PrimeOperations {
 		 */
 		
 		for(int i = 1; i < primes.size(); i++) {
-			BigInteger diff = primes.get(i).subtract(primes.get(i - 1));
-			System.out.print(primes.get(i) + ", " + primes.get(i-1));
-			System.out.println("\t" + diff);
+			BigInteger diff = primes.get(i).subtract(primes.get(i-1));
+//			System.out.print(primes.get(i-1) + ", " + primes.get(i));
+//			System.out.println("\t" + diff);
 			if(diff.compareTo(new BigInteger("2")) == 0){
-				System.out.println("adding to the list");
-				primeTwins.add(primes.get(i));
-				primeTwins.add(primes.get(i-1));
+//				System.out.println("adding to the list");
+				PrimeOperations.Pair<BigInteger> twins = new Pair<BigInteger>(primes.get(i-1), primes.get(i));
+				primeTwins.add(twins);
+//				primeTwins.add(primes.get(i));
+//				primeTwins.add(primes.get(i-1));
 			}
 		}
 	}
@@ -152,7 +187,44 @@ public class PrimeOperations {
 	// Generate and store the hexagon crosses, along with the two twin primes that generate the hexagon cross.
 	public void generateHexPrimes()
 	{
-		//loop through list
-		//if twin prime
+		/*
+		 * A “hexagon cross” is a pair of numbers that are the middle integer between the primes in a twin prime, 
+		 * such that the second number in the pair is twice the first number. For example, 6 and 12 make up a hexagon cross, 
+		 * because 6 is the integer between the twin prime 5 and 7, and 12 is the middle number 
+		 * between the twin prime 11 and 13, and 6 * 2 = 12. (6,270 and 12540 are another hexagon cross.)
+		 * 
+		 * loop through primeTwins i as iterator{
+		 * 	loop through all numbers x as iterator{
+		 * 		if i-x == 1{
+		 * 			loop through all numbers z as iterator{
+		 * 				if (i-1) - z == 1{
+		 * 					if z*2 == x{
+		 * 						add to list
+		 * 					}
+		 * 				}
+		 * 			}
+		 * 		}
+		 * 	}
+		 * }			
+		 */
+		
+		for(int i = 0; i < primeTwins.size(); i++) {
+			PrimeOperations.Pair<BigInteger> hexCross = new Pair(primeTwins.get(i), primeTwins.get(i+1));
+			
+			BigInteger y1 = hexCross.getY();
+			BigInteger middle1 = y1.subtract(BigInteger.ONE);
+			System.out.println(y1);
+			
+			BigInteger y2 = hexCross.getY();
+			BigInteger middle2 = y2.subtract(BigInteger.ONE);
+			
+			if(y1.multiply(new BigInteger("2")) == y2) {
+				primePairs.add(hexCross);
+				middles.add(y1);
+				middles.add(y2);
+			}
+			
+			
+		}
 	}
 }

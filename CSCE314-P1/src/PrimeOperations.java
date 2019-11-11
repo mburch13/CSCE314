@@ -39,11 +39,6 @@ public class PrimeOperations {
 //				System.out.println(x + " was added to list");
 			}
 		}
-		
-//		for(int i = 0; i < primes.size(); i++) {
-//			System.out.println(primes.get(i));
-//		}
-//		System.out.println("Total Primes: " +primes.size());
 	}
 	
 	// Output the prime list. Each prime should be on a separate line and the total number of primes should be on the following line.
@@ -51,8 +46,8 @@ public class PrimeOperations {
 	{
 //		System.out.print("hello");
 //		System.out.println(primes.size());
-		for(int i = 0; i <= primes.size(); i++) {
-			System.out.println(i);
+		for(int i = 0; i <= primes.size()-1; i++) {
+			System.out.println(primes.get(i));
 		}
 		System.out.println("Total Primes: " +primes.size());
 
@@ -62,6 +57,10 @@ public class PrimeOperations {
 	public void printTwins()
 	{
 		//call and println generateTwinPrimes
+		for(int i = 0; i <= primes.size()-1; i++) {
+			System.out.println(i);
+		}
+		System.out.println("Total Twins: " + primes.size());
 
 	}
 		
@@ -69,6 +68,10 @@ public class PrimeOperations {
 	public void printHexes()
 	{
 		//call and println generateHexPrimes
+		for(int i = 0; i <= primes.size()-1; i++) {
+			System.out.println(i);
+		}
+		System.out.println("Total Hex Crosses: " +primes.size());
 
 	}
 		
@@ -93,28 +96,28 @@ public class PrimeOperations {
 		 * }*/
 		
 		int flag = -1; //change if number is prime
+		BigInteger start = new BigInteger("2");
+//		BigInteger amount = BigInteger.valueOf(count);
 		
-		for(BigInteger x = new BigInteger("2"); x.compareTo(BigInteger.ZERO) > 0; x = x.add(BigInteger.ONE)) {
-			if(count != 0) {
-//				System.out.println("X Before Check: " + x);
-				if(x.compareTo(new BigInteger("2")) != 0 || x.compareTo(new BigInteger("3")) != 0) {
-					flag = 1;
+		for(int amount = count; amount > 0; start = start.add(BigInteger.ONE)) {
+//			System.out.println("X Before Check: " + x);
+			if(start.compareTo(new BigInteger("2")) == 0 || start.compareTo(new BigInteger("3")) == 0) {
+				flag = 1;
+			}
+			for(BigInteger i = new BigInteger("2"); i.compareTo(start.divide(new BigInteger("2"))) <= 0; i = i.add(BigInteger.ONE)) {	
+				if(start.mod(i).equals(BigInteger.ZERO)) {
+				flag = -1;
+					break; //number NOT a prime
 				}
-				for(BigInteger i = new BigInteger("2"); i.compareTo(x.divide(new BigInteger("2"))) <= 0; i = i.add(BigInteger.ONE)) {	
-					if(x.mod(i).equals(BigInteger.ZERO)) {
-						flag = -1;
-						break; //number NOT a prime
-					}
-//					System.out.println("X After Check: " + x);
-					flag = 1;
-				}
-				if(flag == 1) {
-					//addPrime to the list
-					addPrime(x);
-					--count;
-//					System.out.print(x);
-//					System.out.println("\tTest: " + count);
-				}
+//				System.out.println("X After Check: " + x);
+				flag = 1;
+			}
+			if(flag == 1) {
+				//addPrime to the list
+				addPrime(start);
+				amount--;
+//				System.out.print(start);
+//				System.out.println("\tTest: " + amount);
 			}
 		}
 	}

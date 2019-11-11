@@ -19,9 +19,9 @@ public class Project1 {
 		
 		// Generate and test Hexagonal crosses
 		PrimeOperations testThree = new PrimeOperations();
-//		testThree.generatePrimes(2000);
-//		testThree.generateTwinPrimes();
-//		testThree.generateHexPrimes();
-//		testThree.printHexes();
+		testThree.generatePrimes(2000);
+		testThree.generateTwinPrimes();
+		testThree.generateHexPrimes();
+		testThree.printHexes();
 	}
 }

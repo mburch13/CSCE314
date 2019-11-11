@@ -8,11 +8,12 @@ public class PrimeOperations {
 	
 	// Pair class implementation.
 	private class Pair<T> {
-//		BigInteger x, y;
+		BigInteger x, y;
 	}
 	
 	// Member variables for containing out lists of integers, twin primes, hexagon crosses, and the pairs of twin primes that make up the hex crosses.
 	ArrayList<BigInteger> primes = new ArrayList<BigInteger>();
+	ArrayList<BigInteger> primeTwins = new ArrayList<BigInteger>();
 
 	// Add a prime to the prime list if and only iff it is not already in the list. (ignore duplicates)
 	public void addPrime(BigInteger x)
@@ -57,10 +58,10 @@ public class PrimeOperations {
 	public void printTwins()
 	{
 		//call and println generateTwinPrimes
-		for(int i = 0; i <= primes.size()-1; i++) {
-			System.out.println(i);
+		for(int i = 1; i < primeTwins.size(); i++) {
+			System.out.println(primeTwins.get(i) + ", " + primeTwins.get(i-1));
 		}
-		System.out.println("Total Twins: " + primes.size());
+		System.out.println("Total Twins: " + primeTwins.size()/2);
 
 	}
 		
@@ -134,8 +135,18 @@ public class PrimeOperations {
 		 * 			pair (i-1, i)
 		 * 		}
 		 * }
-		 * 
 		 */
+		
+		for(int i = 1; i < primes.size(); i++) {
+			BigInteger diff = primes.get(i).subtract(primes.get(i - 1));
+			System.out.print(primes.get(i) + ", " + primes.get(i-1));
+			System.out.println("\t" + diff);
+			if(diff.compareTo(new BigInteger("2")) == 0){
+				System.out.println("adding to the list");
+				primeTwins.add(primes.get(i));
+				primeTwins.add(primes.get(i-1));
+			}
+		}
 	}
 	
 	// Generate and store the hexagon crosses, along with the two twin primes that generate the hexagon cross.

@@ -16,6 +16,7 @@ public class PrimeOperations {
 			this.y = y1;
 		}
 
+
 		public T getX() {
 			return x;
 		}
@@ -40,9 +41,10 @@ public class PrimeOperations {
 	
 	// Member variables for containing out lists of integers, twin primes, hexagon crosses, and the pairs of twin primes that make up the hex crosses.
 	ArrayList<BigInteger> primes = new ArrayList<BigInteger>();
-	ArrayList<PrimeOperations.Pair<BigInteger>> primeTwins = new ArrayList<PrimeOperations.Pair<BigInteger>>();
-	ArrayList<PrimeOperations.Pair<BigInteger>> primePairs = new ArrayList<PrimeOperations.Pair<BigInteger>>();
-	ArrayList<BigInteger> middles = new ArrayList<BigInteger>();
+	ArrayList<Pair<BigInteger>> primeTwins = new ArrayList<Pair<BigInteger>>();
+	ArrayList<Pair> primePairs = new ArrayList<Pair>();
+	ArrayList<Pair> primeHex = new ArrayList<Pair>();
+
 	// Add a prime to the prime list if and only iff it is not already in the list. (ignore duplicates)
 	public void addPrime(BigInteger x)
 	{
@@ -88,7 +90,7 @@ public class PrimeOperations {
 		//call and println generateTwinPrimes
 		
 //		for(PrimeOperations.Pair<BigInteger> i: primeTwins) {
-		for(int i = 0; i < primeTwins.size(); i++) {
+		for(int i = 1; i < primeTwins.size(); i++) {
 			System.out.println(primeTwins.get(i));
 //			System.out.println(i);
 		}
@@ -100,12 +102,10 @@ public class PrimeOperations {
 	public void printHexes()
 	{
 		//call and println generateHexPrimes
-//		for(int i = 0; i < primePairs.size(); i++) {
-//			for(int x = 0; x < middles.size(); x++) {
-//			System.out.println("Prime Paies: " + i + "and " + i+1 + "seperated by" + x + "' " + x+2);
-//			}
-//		}
-		System.out.println("Total Hex Crosses: " + primePairs.size());
+		for(int i = 0; i < primeHex.size(); i++) {
+			System.out.println("Prime Pairs: " + primePairs.get(i).getX() + " and " + primePairs.get(i).getY() + " are seperated by " + primeHex.get(i).getX());
+		}
+		System.out.println("Total Hex Crosses: " + primeHex.size());
 
 	}
 		
@@ -208,23 +208,22 @@ public class PrimeOperations {
 		 * }			
 		 */
 		
-		for(int i = 0; i < primeTwins.size(); i++) {
-			PrimeOperations.Pair<BigInteger> hexCross = new Pair(primeTwins.get(i), primeTwins.get(i+1));
-			
-			BigInteger y1 = hexCross.getY();
-			BigInteger middle1 = y1.subtract(BigInteger.ONE);
-			System.out.println(y1);
-			
-			BigInteger y2 = hexCross.getY();
-			BigInteger middle2 = y2.subtract(BigInteger.ONE);
-			
-			if(y1.multiply(new BigInteger("2")) == y2) {
-				primePairs.add(hexCross);
-				middles.add(y1);
-				middles.add(y2);
+		for(int i = 0; i < primeTwins.size(); i ++) {
+//			PrimeOperations.Pair<BigInteger> hexCross = new Pair(primeTwins.get(i), primeTwins.get(i+1));
+			for(int k = 0; k < primeTwins.size(); k++) {
+				if(primeTwins.get(i).getX().add(BigInteger.ONE).multiply(new BigInteger ("2")).compareTo(primeTwins.get(k).getX().add(BigInteger.ONE)) == 0) {
+					Pair<BigInteger> p1 = new Pair<BigInteger>(primeTwins.get(i).getX(), primeTwins.get(i).getY());
+					Pair<BigInteger> p2 = new Pair<BigInteger>(primeTwins.get(k).getX(), primeTwins.get(k).getY());
+					Pair<BigInteger> s1 = new Pair<BigInteger>(primeTwins.get(i).getX().add(BigInteger.ONE), (primeTwins.get(k).getX().add(BigInteger.ONE)));
+					Pair<BigInteger> s2 = new Pair<BigInteger>(primeTwins.get(i+1).getX().add(BigInteger.ONE), (primeTwins.get(k+1).getX().add(BigInteger.ONE)));
+					
+					Pair<Pair> pairs = new Pair<Pair>(p1, p2);
+					primePairs.add(pairs);
+					
+					Pair<Pair> splits = new Pair<Pair>(s1, s2);
+					primeHex.add(splits);
+				}
 			}
-			
-			
 		}
 	}
 }

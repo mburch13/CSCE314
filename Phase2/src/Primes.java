@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.math.BigInteger;
+/*
+ * A partial Primes class is provided. You may use this as a starting point or use your own. 
+ * This is a deliberately “not optimal” solution, but it is a viable one. 
+ * You will need to add code for the blank public functions in this class.
+ */
 
 /*
  *  Desc: This class generates primes, twin primes, and hexagon crosses using BigInteger data types.

@@ -1,5 +1,18 @@
 import java.math.BigInteger;
 
+/*
+ * A NaiveTest.java file is included with a simple, functional isPrime function. 
+ * replace isPrime function with a more efficient test for primality. 
+ * This test must be absolute. This means you can not use any of the probabilistic tests as your 
+ * sole determiner of primality. (This includes but is not limited to Fermat’s, Miller-Rabin, and 
+ * Solovay-Strasson, Adleman-Huang, Baille-PSW, and Frobenius.) You must use a deterministic primality 
+ * test. You can use a fast probabilistic tests as an initial qualifier, as the NaiveTest uses 
+ * BigInteger’s isProbablePrime function, but you must then use an absolute test. You are not only 
+ * allowed, but encouraged to search Stack Overflow and other online resources for ideas and code 
+ * to implement this one feature. However, you must cite your sources and give appropriate credit 
+ * for any code that you do not come up with solely on your own.
+ */
+
 public class NaiveTest
 {
 	public static boolean isPrime(BigInteger candidate)

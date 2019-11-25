@@ -29,7 +29,7 @@ public class Primes {
 	// Adds a pair of BigIntegers that represent a Hexagonal Cross.
 	public void addCross(Pair<BigInteger> pair)
 	{
-
+		crossList.add(pair);
 	}
 	
 	// Empties the list of primes.
@@ -130,36 +130,36 @@ public class Primes {
 	}
 
 	// Count the number of digits in the last (and thus largest) prime.
-	public int sizeofLastPrime()
-	{
-	}
+//	public int sizeofLastPrime()
+//	{
+//	}
 	
 	// Count the number of digits in the two entries in the last (and thus largest) hexagon cross
-	public Pair<Integer> sizeofLastCross()
-	{
-	}
+//	public Pair<Integer> sizeofLastCross()
+//	{
+//	}
 	
 	// Return the number of primes
-	public int primeCount()
-	{
-	}
+//	public int primeCount()
+//	{
+//	}
 	
 	// Return the number of crosses.
-	public int crossesCount()
-	{
-	}
+//	public int crossesCount()
+//	{
+//	}
 	
-	public class IterablePrimes implements Iterable<BigInteger>
-	{		
-	}
+//	public class IterablePrimes implements Iterable<BigInteger>
+//	{		
+//	}
 	
-	public IterablePrimes iteratePrimes() { return new IterablePrimes();}
+//	public IterablePrimes iteratePrimes() { return new IterablePrimes();}
 
-	public class IterableCrosses implements Iterable<BigInteger>
-	{		
-	}
+//	public class IterableCrosses implements Iterable<Pair<BigInteger>>
+//	{		
+//	}
 	
-	public IterableCrosses iterateCrosses() { return new IterablePrimes();}
+//	public IterableCrosses iterateCrosses() { return new IterablePrimes();}
 
 
 }

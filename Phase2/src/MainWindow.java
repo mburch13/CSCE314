@@ -15,6 +15,17 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.SwingConstants;
 
+/*
+ * This is the main file for creating your application window. 
+ * It should create the window described in the GUI and add ActionListeners to all the GUI elements 
+ * that need user interactivity. Complete code is provided for the “Generating Prime Numbers” dialog box.
+ * You may optimize this code or use it as-it.
+ * 
+ * You will also need to add two Iterators to the Primes class, one for Primes, one for Crosses. 
+ * You will use these in your save functions to iterate through the relevant ArrayList. 
+ * You will implement these iterators as private classes that implement the Iterable interface.
+ */
+
 public class MainWindow extends JFrame
 {
 	private static final long serialVersionUID = -3880026026104218593L;

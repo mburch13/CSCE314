@@ -19,11 +19,32 @@ import java.util.Scanner;
 
 public class FileAccess {
   
-  public static boolean loadPrimes(Primes primes, String filename) {
+  public static boolean loadPrimes(Primes primes, String filename) throws FileNotFoundException {
+	  File prime = new File(Config.DATAPATH + filename);
+	  Scanner sc = new Scanner(prime);
+	  
+	  while(sc.hasNextLine()) {
+		  BigInteger a = new BigInteger(sc.nextLine());
+		  primes.addPrime(a);
+	  }
 		return true;
   }
   
-  public static boolean loadCrosses(Primes primes, String filename) {
+  public static boolean loadCrosses(Primes primes, String filename) throws FileNotFoundException {
+	  File cross = new File(Config.DATAPATH + filename);
+	  Scanner sc = new Scanner(cross);
+	  
+	  while(sc.hasNextLine()) {
+		  String line = sc.nextLine();
+		  String one = line.substring(0, line.indexOf(","));
+		  String two = line.substring(line.indexOf(",")+1);
+		  
+		  BigInteger x = new BigInteger(one);
+		  BigInteger y = new BigInteger(two);
+		  
+		  Pair<BigInteger> myPair = new Pair<BigInteger>(x, y);
+		  primes.addCross(myPair);
+	  }
     return true;
 	}
   

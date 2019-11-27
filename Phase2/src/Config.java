@@ -4,7 +4,7 @@ public class Config {
   public final static String DATAPATH = "data/"; // If you don't know what the static keyword does, you better go look it up now.
   public final static String APPLICATIONNAME = "Hexagon Cross Generator";
   // Prime file: One prime per line.
-  public String primeFile = "primes.txt"; 
+  public static String primeFile = "primes.txt"; 
   // Cross file: Two primes per line, separated by a comma.
-  public String crossFile = "crosses.text";
+  public static String crossFile = "crosses.txt";
 }

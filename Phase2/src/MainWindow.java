@@ -78,104 +78,125 @@ public class MainWindow extends JFrame
 		windCons.gridx = 0;
 		windCons.gridy = 0;
 		
-		GridBagConstraints panelCons = new GridBagConstraints();
-		panelCons.anchor = GridBagConstraints.WEST;
-		panelCons.ipady = 10;
-		panelCons.weightx = .5;
-		panelCons.insets = new Insets(1,2,0,0);
-		panelCons.gridx = 0;
-		panelCons.gridy = 0;
+		GridBagConstraints westCons = new GridBagConstraints();
+//		westCons.fill = GridBagConstraints.HORIZONTAL;
+		westCons.anchor = GridBagConstraints.WEST;
+		westCons.ipady = 10;
+		westCons.weightx = .5;
+		westCons.insets = new Insets(1,2,0,0);
+		westCons.gridx = 0;
+		westCons.gridy = 0;
 		
-		GridBagConstraints buttonCons = new GridBagConstraints();
-		buttonCons.anchor = GridBagConstraints.EAST;
-		buttonCons.ipady = 10;
-		buttonCons.weightx = .5;
-		buttonCons.insets = new Insets(1,2,0,0);
-		buttonCons.gridx = 0;
-		buttonCons.gridy = 0;
+		GridBagConstraints eastCons = new GridBagConstraints();
+		eastCons.anchor = GridBagConstraints.EAST;
+		eastCons.ipady = 10;
+		eastCons.weightx = .5;
+		eastCons.insets = new Insets(1,2,0,0);
+		eastCons.gridx = 0;
+		eastCons.gridy = 0;
 		
 		JPanel primePanel = new JPanel();
 		primePanel.setLayout(new GridBagLayout());
 		
-		JTextField primesFile = new JTextField(Config.primeFile);
-		primesFile.setColumns(75);
-		primePanel.add(primesFile, panelCons);
+		tfPrimeFileName = new JTextField(Config.primeFile);
+		tfPrimeFileName.setColumns(75);
+		primePanel.add(tfPrimeFileName, westCons);
+		
+		lblPrimeCount = new JLabel("0");
+		lblPrimeCount.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblPrimeCount.setAlignmentX(CENTER_ALIGNMENT);
+		eastCons.gridx = 1;
+		primePanel.add(lblPrimeCount, eastCons);
 		
 		JLabel lblPrimes = new JLabel("Primes File");
 		lblPrimes.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		panelCons.gridy = 1;
-		primePanel.add(lblPrimes, panelCons);
+		westCons.gridx = 0;
+		westCons.gridy = 1;
+		primePanel.add(lblPrimes, westCons);
 		
 		JButton loadPrimes = new JButton("Load");
 		loadPrimes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Primes p = new Primes();
 				FileAccess f = new FileAccess();
 				try {
-					f.loadPrimes(p, Config.primeFile);
-					p.printPrimes();
+					f.loadPrimes(m_Primes, Config.primeFile);
+					lblStatus.setText("Status: Primes list successfully loaded");
+					updateStats();
+					m_Primes.printPrimes();
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
+					lblStatus.setText("Status: Primes list failed to load");
+					updateStats();
 					e1.printStackTrace();
 				}
 			}
 		});
-		buttonCons.gridy = 1;
-		primePanel.add(loadPrimes, buttonCons);
+		eastCons.gridy = 1;
+		eastCons.gridx = 0;
+		primePanel.add(loadPrimes, eastCons);
 		
 		JButton savePrimes = new JButton("Save");
 		savePrimes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				System.out.println("nothing to save yet");				
 			}
 		});
-		buttonCons.gridx = 1;
-		primePanel.add(savePrimes, buttonCons);
+		eastCons.gridx = 1;
+		primePanel.add(savePrimes, eastCons);
 		
 		window.add(primePanel, windCons);
 		
 		JPanel crossPanel = new JPanel();
 		crossPanel.setLayout(new GridBagLayout());
 		
-		JTextField crossFile = new JTextField(Config.crossFile);
-		crossFile.setColumns(75);
-		panelCons.gridy = 0;
-		crossPanel.add(crossFile, panelCons);
+		tfCrossFileName = new JTextField(Config.crossFile);
+		tfCrossFileName.setColumns(75);
+		westCons.gridy = 0;
+		westCons.gridx = 0;
+		crossPanel.add(tfCrossFileName, westCons);
+		
+		lblCrossCount = new JLabel("0");
+		lblCrossCount.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblCrossCount.setAlignmentX(CENTER_ALIGNMENT);
+		eastCons.gridx = 1;
+		eastCons.gridy = 0;
+		crossPanel.add(lblCrossCount, eastCons);
 		
 		JLabel lblCross = new JLabel("Crosses File");
 		lblCross.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		panelCons.gridy = 1;
-		crossPanel.add(lblCross, panelCons);
+		westCons.gridy = 1;
+		westCons.gridx = 0;
+		crossPanel.add(lblCross, westCons);
 		
 		JButton loadCross = new JButton("Load");
-		loadPrimes.addActionListener(new ActionListener() {
+		loadCross.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Primes p = new Primes();
 				FileAccess f = new FileAccess();
 				try {
 					f.loadCrosses(p,  Config.crossFile);
-					p.printPrimes();
+					m_Primes.printHexes();
+					lblStatus.setText("Status: Cross list successfully loaded");
+					updateStats();
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
+					lblStatus.setText("Status: Cross list failed to load");
+					updateStats();
 					e1.printStackTrace();
 				}
 			}
 		});
 		
-		buttonCons.gridx = 0;
-		buttonCons.gridy = 1;
-		crossPanel.add(loadCross, buttonCons);
+		eastCons.gridx = 0;
+		eastCons.gridy = 1;
+		crossPanel.add(loadCross, eastCons);
 		
 		JButton saveCross = new JButton("Save");
-		savePrimes.addActionListener(new ActionListener() {
+		saveCross.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+				System.out.println("nothing to save yet");
 			}
 		});
-		buttonCons.gridx = 1;
-		crossPanel.add(saveCross, buttonCons);
+		eastCons.gridx = 1;
+		crossPanel.add(saveCross, eastCons);
 		
 		windCons.gridy = 1;
 		window.add(crossPanel, windCons);
@@ -189,21 +210,48 @@ public class MainWindow extends JFrame
 				popupGeneratePrimes();
 			}
 		});
-		generators.add(genPrimes, panelCons);
+		generators.add(genPrimes, westCons);
+		
+		lblLargestPrime = new JLabel("The largest prime has x digits");
+		lblLargestPrime.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+		westCons.gridx = 1;
+		westCons.gridy = 0;
+		westCons.anchor = GridBagConstraints.CENTER;
+		generators.add(lblLargestPrime, westCons);
+		
+		lblLargestCross = new JLabel("The largest cross has x and y digits");
+		lblLargestCross.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblLargestCross.setAlignmentX(CENTER_ALIGNMENT);
+		westCons.gridy = 1;
+		generators.add(lblLargestCross, westCons);
 		
 		JButton genCross = new JButton("Generate Crosses");
 		genCross.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				System.out.println("nothing to generate yet");
 				
 			}
 		});
-		generators.add(genCross, buttonCons);
+		westCons.gridx = 2;
+		westCons.anchor = GridBagConstraints.EAST;
+		generators.add(genCross, westCons);
 		
 		windCons.gridy = 2;
 		window.add(generators, windCons);
 		
+		JPanel statPanel = new JPanel();
+		
+		lblStatus = new JLabel();
+		lblStatus.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		westCons.gridx = 0;
+		statPanel.add(lblStatus, westCons);
+		
+		windCons.gridy = 3;
+		window.add(statPanel, windCons);
+		
 		window.setSize(1000, 400);
+//		window.pack();
 		window.setVisible(true);
 	}
 

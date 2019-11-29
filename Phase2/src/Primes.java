@@ -40,13 +40,13 @@ public class Primes {
 	// Empties the list of primes.
 	public void clearPrimes()
 	{
-	
+		primeList.clear();
 	}
 	
 	// Empties the list of crosses.
 	public void clearCrosses()
 	{
-
+		crossList.clear();
 	}
 	
 	// Output the prime list. Each prime should be on a separate line and the total number of primes should be on the following line.
@@ -135,36 +135,75 @@ public class Primes {
 	}
 
 	// Count the number of digits in the last (and thus largest) prime.
-//	public int sizeofLastPrime()
-//	{
-//	}
+	public int sizeofLastPrime()
+	{
+		int x = 0;
+		return x;
+	}
 	
 	// Count the number of digits in the two entries in the last (and thus largest) hexagon cross
-//	public Pair<Integer> sizeofLastCross()
-//	{
-//	}
+	public Pair<Integer> sizeofLastCross()
+	{
+		int x = 0;
+		int y = 0;
+		Pair<Integer> lastCrossSize = new Pair<Integer>(x,y);
+		return lastCrossSize;
+	}
 	
 	// Return the number of primes
-//	public int primeCount()
-//	{
-//	}
+	public int primeCount()
+	{
+		return primeList.size();
+	}
 	
 	// Return the number of crosses.
-//	public int crossesCount()
-//	{
-//	}
+	public int crossesCount()
+	{
+		return crossList.size();
+	}
 	
-//	public class IterablePrimes implements Iterable<BigInteger>
-//	{		
-//	}
-	
-//	public IterablePrimes iteratePrimes() { return new IterablePrimes();}
+	public class IterablePrimes implements Iterable<BigInteger>
+	{
+		public Iterator<BigInteger> iterator() {
+			Iterator<BigInteger> it = new Iterator<BigInteger>() {
+				private int currentIndex = 0;
+				
+				public boolean hasNext() {
+					return currentIndex < primeList.size() && primeList.get(currentIndex) != null;
+				}
 
-//	public class IterableCrosses implements Iterable<Pair<BigInteger>>
-//	{		
-//	}
+				@Override
+				public BigInteger next() {
+					return primeList.get(currentIndex++);
+				}
+			};
+			
+			return it;
+		}		
+	}
 	
-//	public IterableCrosses iterateCrosses() { return new IterablePrimes();}
+	public IterablePrimes iteratePrimes() { return new IterablePrimes();}
+
+	public class IterableCrosses implements Iterable<Pair<BigInteger>>
+	{
+		public Iterator<Pair<BigInteger>> iterator() {
+			Iterator<Pair<BigInteger>> it = new Iterator<Pair<BigInteger>>() {
+				private int currentIndex = 0;
+
+				public boolean hasNext() {
+					return currentIndex < crossList.size() && crossList.get(currentIndex) != null;
+				}
+
+				public Pair<BigInteger> next() {
+					return crossList.get(currentIndex++);
+				}
+				
+			};
+			return it;
+		}		
+	}
+	
+	public IterableCrosses iterateCrosses() { return new IterableCrosses();}
 
 
 }

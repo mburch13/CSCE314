@@ -124,7 +124,6 @@ public class MainWindow extends JFrame
 					updateStats();
 					m_Primes.printPrimes();
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
 					lblStatus.setText("Status: Primes list failed to load");
 					updateStats();
 					e1.printStackTrace();
@@ -251,7 +250,6 @@ public class MainWindow extends JFrame
 		window.add(statPanel, windCons);
 		
 		window.setSize(1000, 400);
-//		window.pack();
 		window.setVisible(true);
 	}
 
@@ -369,6 +367,7 @@ public class MainWindow extends JFrame
 	// This function updates all the GUI statistics. (# of primes, # of crosses, etc)
 	private void updateStats()
 	{
+		
  	}
 
 }

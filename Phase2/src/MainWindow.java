@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.math.BigInteger;
 import javax.swing.JPanel;
 import java.awt.GridBagConstraints;
@@ -137,7 +138,15 @@ public class MainWindow extends JFrame
 		JButton savePrimes = new JButton("Save");
 		savePrimes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("nothing to save yet");				
+				FileAccess f = new FileAccess();
+				String count = "";
+				try {
+					f.savePrimes(m_Primes, Config.primeFile);
+					lblPrimeCount.setText(count.valueOf(m_Primes.primeCount()));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		eastCons.gridx = 1;
@@ -172,7 +181,7 @@ public class MainWindow extends JFrame
 			public void actionPerformed(ActionEvent e) {
 				FileAccess f = new FileAccess();
 				try {
-					f.loadCrosses(p,  Config.crossFile);
+					f.loadCrosses(m_Primes,  Config.crossFile);
 					m_Primes.printHexes();
 					lblStatus.setText("Status: Cross list successfully loaded");
 					updateStats();
@@ -191,7 +200,15 @@ public class MainWindow extends JFrame
 		JButton saveCross = new JButton("Save");
 		saveCross.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("nothing to save yet");
+				FileAccess f = new FileAccess();
+				String count = "";
+				try {
+					f.saveCrosses(m_Primes, Config.crossFile);
+					lblCrossCount.setText(count.valueOf(m_Primes.crossesCount()));
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		eastCons.gridx = 1;

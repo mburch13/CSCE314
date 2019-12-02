@@ -9,6 +9,7 @@
  * user-specified filenames from the GUI. This custom filename ability can allow the user to specify 
  * additional path information as part of the custom filename.
  */
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -48,13 +49,33 @@ public class FileAccess {
     return true;
 	}
   
-  public static boolean savePrimes(Primes primes, String filename)
-  {
-  	return true;
+  public static boolean savePrimes(Primes primes, String filename) throws IOException
+  {  
+	  
+	  Iterator<BigInteger> itP= (Iterator<BigInteger>) primes.iteratePrimes();
+	  
+	  BufferedWriter writer = new BufferedWriter(new FileWriter(Config.DATAPATH + filename));
+//	  for(itP.hasNext() : primes) {
+//		  
+//	  }
+	  while(itP.hasNext()) {
+		  writer.write(itP.next().toString());
+	  }
+	  writer.close();
+
+	  return true;
   }
   
-  public static boolean saveCrosses(Primes primes, String filename)
+  public static boolean saveCrosses(Primes primes, String filename) throws IOException
   {
-  	return true;
+	  Iterator<BigInteger> itC = (Iterator<BigInteger>) primes.iterateCrosses();
+	  BufferedWriter writer = new BufferedWriter(new FileWriter(Config.DATAPATH + filename));
+	  
+	  while(itC.hasNext()) {
+		  writer.write(itC.next().toString());
+	  }
+	  writer.close();
+	  
+	  return true;
   }
 }

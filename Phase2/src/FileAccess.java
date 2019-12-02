@@ -10,6 +10,7 @@
  * additional path information as part of the custom filename.
  */
 import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.Scanner;
+
 
 public class FileAccess {
   
@@ -51,16 +53,19 @@ public class FileAccess {
   
   public static boolean savePrimes(Primes primes, String filename) throws IOException
   {  
+	  File f = new File(Config.DATAPATH + filename);
 	  
-	  Iterator<BigInteger> itP= (Iterator<BigInteger>) primes.iteratePrimes();
-	  
-	  BufferedWriter writer = new BufferedWriter(new FileWriter(Config.DATAPATH + filename));
-//	  for(itP.hasNext() : primes) {
-//		  
-//	  }
-	  while(itP.hasNext()) {
-		  writer.write(itP.next().toString());
+	  if(!f.exists()) {
+		  f.createNewFile();
 	  }
+	  
+	  BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+	  Primes.IterablePrimes itP = primes.iteratePrimes();
+	  
+	  for(BigInteger p : itP) {
+		  writer.write(p.toString() + "\n");
+	  }
+
 	  writer.close();
 
 	  return true;
@@ -68,11 +73,16 @@ public class FileAccess {
   
   public static boolean saveCrosses(Primes primes, String filename) throws IOException
   {
-	  Iterator<BigInteger> itC = (Iterator<BigInteger>) primes.iterateCrosses();
-	  BufferedWriter writer = new BufferedWriter(new FileWriter(Config.DATAPATH + filename));
+	  File f = new File(Config.DATAPATH + filename);
 	  
-	  while(itC.hasNext()) {
-		  writer.write(itC.next().toString());
+	  if(!f.exists()) {
+		  f.createNewFile();
+	  }
+	  
+	  BufferedWriter writer = new BufferedWriter(new FileWriter(Config.DATAPATH + filename));
+	  Primes.IterableCrosses itC = primes.iterateCrosses();
+	  for(Pair<BigInteger> c : itC) {
+		  writer.write(itC.toString() + "\n");
 	  }
 	  writer.close();
 	  

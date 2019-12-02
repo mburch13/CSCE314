@@ -167,19 +167,18 @@ public class Primes {
 		public Iterator<BigInteger> iterator() {
 			Iterator<BigInteger> it = new Iterator<BigInteger>() {
 				private int currentIndex = 0;
-				
+
 				public boolean hasNext() {
 					return currentIndex < primeList.size() && primeList.get(currentIndex) != null;
 				}
 
-				@Override
 				public BigInteger next() {
 					return primeList.get(currentIndex++);
 				}
+				
 			};
-			
 			return it;
-		}		
+		}
 	}
 	
 	public IterablePrimes iteratePrimes() { return new IterablePrimes();}

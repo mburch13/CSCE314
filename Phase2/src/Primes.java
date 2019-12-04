@@ -34,6 +34,8 @@ public class Primes {
 	// Adds a pair of BigIntegers that represent a Hexagonal Cross.
 	public void addCross(Pair<BigInteger> pair)
 	{
+		//check to see if the pair is already in the list if not add to the list
+		if(!crossList.contains(pair))
 			crossList.add(pair);
 	}
 	
@@ -79,7 +81,7 @@ public class Primes {
 		System.out.println("Total Hexes: " + crossList.size());
 	}
 	
-//Generate and store a list of primes from a given starting point.
+	//Generate and store a list of primes from a given starting point.
 	public void generatePrimes(BigInteger candidate, int count)
 	{
 		primeList.clear();
@@ -138,9 +140,13 @@ public class Primes {
 	public int sizeofLastPrime()
 	{
 		int x = 0;
+		
+		//see if list is not empty
 		if(!primeList.isEmpty()) {
+			//get last prime and set to string
 			String lastPrime = String.valueOf(primeList.get(primeList.size() - 1));
 			
+			//get length of the last prime string
 			x = lastPrime.length();
 		}
 		
@@ -152,14 +158,19 @@ public class Primes {
 	{
 		int x = 0;
 		int y = 0;
+
+		//see if list is not empty
 		if(!crossList.isEmpty()) {
+			//get the left and right values of the cross and set to string
 			String lastCross_x = String.valueOf(crossList.get(crossList.size() - 1).left());
 			String lastCross_y = String.valueOf(crossList.get(crossList.size() - 1).right());
 
+			//get length of each left and right cross string
 			x = lastCross_x.length();
 			y = lastCross_y.length();
 		}
 		
+		//set string lengths as pair
 		Pair<Integer> lastCrossSize = new Pair<Integer>(x,y);
 		return lastCrossSize;
 	}
@@ -178,14 +189,19 @@ public class Primes {
 	
 	public class IterablePrimes implements Iterable<BigInteger>
 	{
+		//create iterator for primes of type BigInteger
 		public Iterator<BigInteger> iterator() {
 			Iterator<BigInteger> it = new Iterator<BigInteger>() {
 				private int currentIndex = 0;
 
+				//hasNext function for iterate primes
+				//sees if there is a next element in the list
 				public boolean hasNext() {
 					return currentIndex < primeList.size() && primeList.get(currentIndex) != null;
 				}
 
+				//next function for iterate primes
+				//returns the next element in the primes list
 				public BigInteger next() {
 					return primeList.get(currentIndex++);
 				}
@@ -199,14 +215,19 @@ public class Primes {
 
 	public class IterableCrosses implements Iterable<Pair<BigInteger>>
 	{
+		//create iterator for cross of type Pair BigInteger
 		public Iterator<Pair<BigInteger>> iterator() {
 			Iterator<Pair<BigInteger>> it = new Iterator<Pair<BigInteger>>() {
 				private int currentIndex = 0;
 
+				//hasNext function for iterate cross
+				//sees if there is a next element in the list
 				public boolean hasNext() {
 					return currentIndex < crossList.size() && crossList.get(currentIndex) != null;
 				}
 
+				//next function for iterate primes
+				//returns the next element in the cross list
 				public Pair<BigInteger> next() {
 					return crossList.get(currentIndex++);
 				}

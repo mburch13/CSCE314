@@ -45,9 +45,9 @@ public class FileAccess {
 			String rightC = line.substring(line.indexOf(",") + 1);
 
 			Pair<BigInteger> myPair = new Pair<BigInteger>(new BigInteger(leftC), new BigInteger(rightC));
-			primes.addCross(myPair);
+			primes.addPair(myPair);
 		} 
-	return true;
+	  return true;
 	}
   
   public static boolean savePrimes(Primes primes, String filename) throws IOException

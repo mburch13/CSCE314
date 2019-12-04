@@ -34,7 +34,7 @@ public class Primes {
 	// Adds a pair of BigIntegers that represent a Hexagonal Cross.
 	public void addCross(Pair<BigInteger> pair)
 	{
-		crossList.add(pair);
+			crossList.add(pair);
 	}
 	
 	// Empties the list of primes.
@@ -138,6 +138,12 @@ public class Primes {
 	public int sizeofLastPrime()
 	{
 		int x = 0;
+		if(!primeList.isEmpty()) {
+			String lastPrime = String.valueOf(primeList.get(primeList.size() - 1));
+			
+			x = lastPrime.length();
+		}
+		
 		return x;
 	}
 	
@@ -146,6 +152,14 @@ public class Primes {
 	{
 		int x = 0;
 		int y = 0;
+		if(!crossList.isEmpty()) {
+			String lastCross_x = String.valueOf(crossList.get(crossList.size() - 1).left());
+			String lastCross_y = String.valueOf(crossList.get(crossList.size() - 1).right());
+
+			x = lastCross_x.length();
+			y = lastCross_y.length();
+		}
+		
 		Pair<Integer> lastCrossSize = new Pair<Integer>(x,y);
 		return lastCrossSize;
 	}

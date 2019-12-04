@@ -28,26 +28,6 @@ import javax.swing.SwingConstants;
  * You will implement these iterators as private classes that implement the Iterable interface.
  */
 
-/*
- * GUI
- * create a primary window for the program that is 1000x400 pixels in size. 
- * The background color should be the Texas A&M specific shade of maroon used by the school. 
- * The application may be given any name decided upon by the developer. 
- * This window should contain a textbox for entering the Primes the Hexagon Cross file name.
- * Buttons for loading and saving each of these files should be specified, and the default file names 
- * should be initially set for each of these items.
- *  
- * The main window should contain a status bar to keep the user informed of the success or failure of
- * any given operation. It should also contain metadata about the work being done, such as the number
- * of primes generated or loaded (9000), the number of Hexagon Crosses generated or loaded (14), the
- * length of the largest prime (6 digits) and the length of the two numbers in the largest Hexagon Cross
- * (5 and 5 digits).
- *  
- * Buttons for generating primes and generating crosses should be implemented. The Generate Primes
- * button should create a dialog box for the user to enter the number of primes to generate and a
- * starting number. The program should be able to accept and process numbers of arbitrary length. The
- * program may be single-threaded.
- */
 
 public class MainWindow extends JFrame
 {
@@ -64,6 +44,8 @@ public class MainWindow extends JFrame
 	MainWindow(String name, Primes p)
 	{
 		m_Primes = p;
+		
+		//create main window
 		JFrame window = new JFrame(name);
 		GridBagLayout gridLayout = new GridBagLayout();
 		
@@ -71,6 +53,7 @@ public class MainWindow extends JFrame
 		window.getContentPane().setBackground(new Color(80,0,0));
 		window.getContentPane().setLayout(gridLayout);
 		
+		//set constraints for main window
 		GridBagConstraints windCons = new GridBagConstraints();
 		windCons.fill = GridBagConstraints.HORIZONTAL;
 		windCons.anchor = GridBagConstraints.WEST;
@@ -80,8 +63,8 @@ public class MainWindow extends JFrame
 		windCons.gridx = 0;
 		windCons.gridy = 0;
 		
+		//set constraints for everything that needs to be on the left side of the screen
 		GridBagConstraints westCons = new GridBagConstraints();
-//		westCons.fill = GridBagConstraints.HORIZONTAL;
 		westCons.anchor = GridBagConstraints.WEST;
 		westCons.ipady = 10;
 		westCons.weightx = .5;
@@ -89,6 +72,7 @@ public class MainWindow extends JFrame
 		westCons.gridx = 0;
 		westCons.gridy = 0;
 		
+		//set constraints for everything that needs to be on the right side of the screen
 		GridBagConstraints eastCons = new GridBagConstraints();
 		eastCons.anchor = GridBagConstraints.EAST;
 		eastCons.ipady = 10;
@@ -119,16 +103,17 @@ public class MainWindow extends JFrame
 		westCons.gridy = 1;
 		primePanel.add(lblPrimes, westCons);
 		
+		//load primes button
 		JButton loadPrimes = new JButton("Load");
 		loadPrimes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					//access the prime file from the text field
 					FileAccess.loadPrimes(m_Primes, tfPrimeFileName.getText());
 					lblStatus.setText("Status: Primes list successfully loaded");
 					updateStats();
 				} catch (FileNotFoundException e1) {
 					lblStatus.setText("Status: Primes list failed to load");
-					e1.printStackTrace();
 				}
 			}
 		});
@@ -137,15 +122,16 @@ public class MainWindow extends JFrame
 		eastCons.gridx = 0;
 		primePanel.add(loadPrimes, eastCons);
 		
+		//save primes file
 		JButton savePrimes = new JButton("Save");
 		savePrimes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					//access the name of the file that you want to save to from the text field
 					FileAccess.savePrimes(m_Primes, tfPrimeFileName.getText());
 					lblStatus.setText("Status: Primes list successfully saved");
 				} catch (IOException e1) {
 					lblPrimeCount.setText("Status: Failed to save primes");
-					e1.printStackTrace();
 				}
 			}
 		});
@@ -182,17 +168,18 @@ public class MainWindow extends JFrame
 		westCons.gridx = 0;
 		crossPanel.add(lblCross, westCons);
 		
+		//load button for crosses
 		JButton loadCross = new JButton("Load");
 		loadCross.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					//access file for crosses from text field
 					FileAccess.loadCrosses(m_Primes, tfCrossFileName.getText());
 					updateStats();
 					lblStatus.setText("Status: Cross list successfully loaded");
 					
 				} catch (FileNotFoundException e1) {
 					lblStatus.setText("Status: Cross list failed to load");
-					e1.printStackTrace();
 				}
 			}
 		});
@@ -201,10 +188,12 @@ public class MainWindow extends JFrame
 		eastCons.gridy = 1;
 		crossPanel.add(loadCross, eastCons);
 		
+		//save button for crosses
 		JButton saveCross = new JButton("Save");
 		saveCross.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					//access file that you want to save to from text field
 					FileAccess.saveCrosses(m_Primes, tfCrossFileName.getText());
 					lblStatus.setText("Status: Cross list successfully saved");
 				} catch (IOException e1) {
@@ -233,6 +222,7 @@ public class MainWindow extends JFrame
 		});
 		generators.add(genPrimes, westCons);
 		
+		//label that states the amount of digits of the largest prime 
 		lblLargestPrime = new JLabel("The largest prime has 0 digits");
 		lblLargestPrime.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
@@ -241,11 +231,13 @@ public class MainWindow extends JFrame
 		westCons.anchor = GridBagConstraints.CENTER;
 		generators.add(lblLargestPrime, westCons);
 		
+		//label that states the amount of digits of the largest cross
 		lblLargestCross = new JLabel("The largest cross has 0 and 0 digits");
 		lblLargestCross.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		westCons.gridy = 1;
 		generators.add(lblLargestCross, westCons);
 		
+		//generate hex crosses
 		JButton genCross = new JButton("Generate Crosses");
 		genCross.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -400,12 +392,17 @@ public class MainWindow extends JFrame
 		dPrimes.pack(); // Knowing what this is and why it is needed is important. You should read the documentation on this function!
 		dPrimes.setVisible(true);		
 	}
+	
+//-----------------------------------------------------------------------------------
 
 	// This function updates all the GUI statistics. (# of primes, # of crosses, etc)
 	private void updateStats()
 	{
+		//update the list count for primes and crosses
 		lblPrimeCount.setText(String.valueOf(m_Primes.primeCount()));
+		lblCrossCount.setText(String.valueOf(m_Primes.crossesCount()));
 		
+		//update the largest digits for primes and crosses
 		String largeP = String.valueOf(m_Primes.sizeofLastPrime());
 		lblLargestPrime.setText("The largest prime has " +  largeP + " digits");
 		
@@ -414,9 +411,7 @@ public class MainWindow extends JFrame
 		String cRight = String.valueOf(largeC.right());
 		lblLargestCross.setText("The largest cross has " + cLeft  + " and " + cRight + " digits");
 		
-		lblCrossCount.setText(String.valueOf(m_Primes.crossesCount()));
-		System.out.println("Cross Count: " + m_Primes.crossesCount());
-
+		
  	}
 
 }
